@@ -1,21 +1,17 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
 }
 
 android {
-    namespace = "com.avsoftware.dashboard"
+    namespace = "com.avsoftware.core_ui"
     compileSdk = Configs.compileSdk
 
     defaultConfig {
-        applicationId = "com.avsoftware.dashboard"
         minSdk = Configs.minSdk
-        targetSdk = Configs.targetSdk
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -35,15 +31,11 @@ android {
         jvmTarget = Configs.jvmTarget
     }
     buildFeatures {
-        viewBinding = true
         compose = true
     }
-    buildToolsVersion = "36.0.0"
 }
 
 dependencies {
-
-    // compose BOM
     implementation(platform(libs.androidx.compose.bom))
 
     // Add the entire compose bundle
@@ -51,15 +43,15 @@ dependencies {
     // Since ui-tooling is typically used in debug builds, keep it separate
     debugImplementation(libs.androidx.ui.tooling)
 
-    implementation(project(":core-ui"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
-    implementation(libs.constraintlayout)
-    implementation(libs.navigation.fragment.ktx)
-    implementation(libs.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // ui testing
+    androidTestImplementation (libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }

@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Personal Investment Dashboard"
 include(":app")
+include(":core-ui")
