@@ -26,6 +26,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+
+        }
     }
     compileOptions {
         sourceCompatibility = Configs.sourceCompatibility
@@ -38,6 +41,9 @@ android {
         viewBinding = true
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Configs.kotlinCompilerExtensionVersion // Match your Kotlin version
+    }
     buildToolsVersion = "36.0.0"
 }
 
@@ -45,11 +51,13 @@ dependencies {
 
     // compose BOM
     implementation(platform(libs.androidx.compose.bom))
-
     // Add the entire compose bundle
     implementation(libs.bundles.compose)
     // Since ui-tooling is typically used in debug builds, keep it separate
     debugImplementation(libs.androidx.ui.tooling)
+
+    // timber
+    implementation(libs.timber)
 
     implementation(project(":core-ui"))
 

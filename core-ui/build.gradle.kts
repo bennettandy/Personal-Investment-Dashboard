@@ -33,6 +33,9 @@ android {
     buildFeatures {
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Configs.kotlinCompilerExtensionVersion // Match your Kotlin version
+    }
 }
 
 dependencies {
@@ -40,6 +43,7 @@ dependencies {
 
     // Add the entire compose bundle
     implementation(libs.bundles.compose)
+    implementation(libs.androidx.ui.text.google.fonts)
     // Since ui-tooling is typically used in debug builds, keep it separate
     debugImplementation(libs.androidx.ui.tooling)
 

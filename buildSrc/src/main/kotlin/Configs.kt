@@ -6,7 +6,7 @@ object Configs {
     const val compileSdk = 35
 
     // Kotlin
-    const val kotlinCompilerExtensionVersion = "1.4.8"
+    const val kotlinCompilerExtensionVersion = "1.5.10"
 
     //
     const val jvmTarget = "1.8"
