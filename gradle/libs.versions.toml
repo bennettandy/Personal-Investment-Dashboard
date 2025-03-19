@@ -2,7 +2,6 @@
 activity-compose = "1.10.1"
 agp = "8.9.0"
 compose-bom = "2025.03.00"
-kotlin = "1.9.22"
 core-ktx = "1.15.0"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.2.1"
@@ -15,6 +14,13 @@ navigation-fragment-ktx = "2.8.9"
 navigation-ui-ktx = "2.8.9"
 timber = "5.0.1"
 ui-text-google-fonts = "1.7.8"
+
+## K
+koin = "3.4.3"
+kotlin = "2.1.10" # update from 1.9.5 # 1.8.20 # see EP-6989 for Upgrade Spike Ticket
+kotlin-parcelize = "2.0.0" # aligns with Kotlin version
+ksp = "2.0.0-1.0.24" # aligns with Kotlin version
+
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
@@ -44,8 +50,12 @@ androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin-parcelize" }
+
 
 [bundles]
 compose = [

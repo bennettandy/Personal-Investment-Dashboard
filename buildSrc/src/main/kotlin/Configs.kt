@@ -12,5 +12,6 @@ object Configs {
     const val jvmTarget = "1.8"
     val sourceCompatibility = JavaVersion.VERSION_1_8
     val targetCompatibility = JavaVersion.VERSION_1_8
-    const val coreLibraryDesugaringEnabled = true
+
+    const val buildToolsVersion = "36.0.0"
 }

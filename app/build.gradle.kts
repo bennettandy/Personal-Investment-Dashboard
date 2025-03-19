@@ -2,6 +2,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.compose.compiler)
+    id ("kotlin-parcelize")
 }
 
 android {
@@ -44,7 +46,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Configs.kotlinCompilerExtensionVersion // Match your Kotlin version
     }
-    buildToolsVersion = "36.0.0"
+    buildToolsVersion = Configs.buildToolsVersion
 }
 
 dependencies {
