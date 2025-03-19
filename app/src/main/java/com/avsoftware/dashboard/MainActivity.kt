@@ -3,8 +3,10 @@ package com.avsoftware.dashboard
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.avsoftware.core_ui.theme.AppTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
+import com.avsoftware.core_ui.theme.DashboardAppTheme
+import com.avsoftware.graphing.animations.FinancesLoadingLottieAnim
 
 class MainActivity : ComponentActivity() {
 
@@ -12,8 +14,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            AppTheme {
-                    Text(text="Hello")
+            DashboardAppTheme {
+                FinancesLoadingLottieAnim(
+                    modifier = Modifier.fillMaxSize()
+                )
             }
         }
     }

@@ -41,6 +41,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+
     implementation(platform(libs.androidx.compose.bom))
 
     // Add the entire compose bundle

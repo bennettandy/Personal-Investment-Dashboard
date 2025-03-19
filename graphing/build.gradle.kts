@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -30,6 +31,12 @@ android {
     kotlinOptions {
         jvmTarget = Configs.jvmTarget
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Configs.kotlinCompilerExtensionVersion // Match your Kotlin version
+    }
 }
 
 dependencies {
@@ -40,6 +47,18 @@ dependencies {
 
     // Compose Charts
     implementation (libs.compose.charts)
+
+    // lottie animations
+    implementation (libs.lottie.compose)
+
+    implementation(platform(libs.androidx.compose.bom))
+
+    // Add the entire compose bundle
+    implementation(libs.bundles.compose)
+    implementation(libs.androidx.ui.text.google.fonts)
+
+    // Since ui-tooling is typically used in debug builds, keep it separate
+    debugImplementation(libs.androidx.ui.tooling)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

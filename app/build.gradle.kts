@@ -51,6 +51,9 @@ android {
 
 dependencies {
 
+    implementation(project(":core-ui"))
+    implementation(project(":graphing"))
+
     // compose BOM
     implementation(platform(libs.androidx.compose.bom))
     // Add the entire compose bundle
@@ -60,8 +63,6 @@ dependencies {
 
     // timber
     implementation(libs.timber)
-
-    implementation(project(":core-ui"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
