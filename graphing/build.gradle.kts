@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.compose.compiler)
-    id ("kotlin-parcelize")
 }
 
 android {
-    namespace = "com.avsoftware.core_ui"
+    namespace = "com.avsoftware.graphing"
     compileSdk = Configs.compileSdk
 
     defaultConfig {
@@ -32,24 +30,16 @@ android {
     kotlinOptions {
         jvmTarget = Configs.jvmTarget
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Configs.kotlinCompilerExtensionVersion // Match your Kotlin version
-    }
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
 
-    // Add the entire compose bundle
-    implementation(libs.bundles.compose)
-    implementation(libs.androidx.ui.text.google.fonts)
+    implementation(project(":core"))
+    implementation(project(":core-ui"))
+    implementation(project(":domain"))
 
-    // Since ui-tooling is typically used in debug builds, keep it separate
-    debugImplementation(libs.androidx.ui.tooling)
-
+    // Compose Charts
+    implementation (libs.compose.charts)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
@@ -57,8 +47,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
-    // ui testing
-    androidTestImplementation (libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }
