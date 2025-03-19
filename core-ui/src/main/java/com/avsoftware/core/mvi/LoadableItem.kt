@@ -1,10 +1,10 @@
-package com.avsoftware.core.state
+package com.avsoftware.core.mvi
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UiItem<T : Parcelable>(
+data class LoadableItem<T : Parcelable>(
     val loadingId: String? = null,
     val isLoading: Boolean = false,
     val isError: Boolean = false,

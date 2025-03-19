@@ -1,10 +1,10 @@
-package com.avsoftware.core.state
+package com.avsoftware.core.mvi
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UiListItem<T : Parcelable>(
+data class LoadableList<T : Parcelable>(
     val loadingId: String? = null,
     val isLoading: Boolean = false,
     val isError: Boolean = false,
@@ -15,7 +15,7 @@ data class UiListItem<T : Parcelable>(
     // Still handy for checking "pristine" state
     fun isNotLoaded() = !isLoading && !isError && data == null
 
-    // New: Can we kick off a load?
+    // Can we kick off a load?
     fun shouldTriggerLoad() = !isLoading && !hasEverLoaded
 
     override fun toString(): String =

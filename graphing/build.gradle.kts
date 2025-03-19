@@ -45,6 +45,13 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(project(":domain"))
 
+    // compose BOM
+    implementation(platform(libs.androidx.compose.bom))
+    // Add the entire compose bundle
+    implementation(libs.bundles.compose)
+    // Since ui-tooling is typically used in debug builds, keep it separate
+    debugImplementation(libs.androidx.ui.tooling)
+
     // Compose Charts
     implementation (libs.compose.charts)
 
