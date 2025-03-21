@@ -3,7 +3,9 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.compose.compiler)
+    id ("com.google.dagger.hilt.android")
     id ("kotlin-parcelize")
+    id ("com.google.devtools.ksp")
 }
 
 android {
@@ -63,6 +65,10 @@ dependencies {
 
     // timber
     implementation(libs.timber)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

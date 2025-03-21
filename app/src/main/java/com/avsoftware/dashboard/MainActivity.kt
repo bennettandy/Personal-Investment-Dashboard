@@ -28,8 +28,10 @@ import com.avsoftware.core_ui.theme.DashboardAppTheme
 import com.avsoftware.dashboard.screen.DashboardScreen
 import com.avsoftware.dashboard.screen.DetailsScreen
 import com.avsoftware.dashboard.splash.SplashScreen
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class)

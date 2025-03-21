@@ -16,6 +16,10 @@ navigation-ui-ktx = "2.8.9"
 timber = "5.0.1"
 ui-text-google-fonts = "1.7.8"
 
+## H
+hilt = "2.51.1"
+
+
 ## K
 koin = "3.4.3"
 kotlin = "2.1.10" # update from 1.9.5 # 1.8.20 # see EP-6989 for Upgrade Spike Ticket
@@ -62,6 +66,10 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "ui-text-google-fonts" }
 
+## H
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+
 ## M
 material = { module = "com.google.android.material:material", version.ref = "material" }
 material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }  # Version from BOM
@@ -91,7 +99,7 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin-parcelize" }
-
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 [bundles]
 compose = [
