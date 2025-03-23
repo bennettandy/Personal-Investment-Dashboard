@@ -33,6 +33,15 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+    implementation(project(":domain"))
+
+    // retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // hilt
+    implementation(libs.hilt.android)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

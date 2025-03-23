@@ -52,6 +52,8 @@ dependencies {
     // Since ui-tooling is typically used in debug builds, keep it separate
     debugImplementation(libs.androidx.ui.tooling)
 
+    // compose charts
+    implementation (libs.compose.charts)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

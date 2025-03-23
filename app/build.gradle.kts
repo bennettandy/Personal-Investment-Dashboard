@@ -66,9 +66,22 @@ dependencies {
     // timber
     implementation(libs.timber)
 
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // OKHttp
+    implementation(libs.okhttp)
+
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+
+    // Orbit MVI
+    implementation(libs.orbit.compose)
+    implementation(libs.orbit.core)
+    implementation(libs.orbit.viewmodel)
+    testImplementation(libs.orbit.test)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
