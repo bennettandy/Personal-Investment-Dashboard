@@ -17,7 +17,6 @@ class RetrofitModule {
 
     companion object {
         private const val BASE_URL = "https://financialmodelingprep.com/"
-        private const val API_KEY = "VvpqUNeIomOzzCXjIpFDHB83p92HVrJi"
     }
 
     @Provides
