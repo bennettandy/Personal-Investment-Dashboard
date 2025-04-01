@@ -1,6 +1,7 @@
 package com.avsoftware.data.fmp.search
 
 import com.avsoftware.data.fmp.search.model.StockSymbol
+import com.avsoftware.database.stock.StockSymbolEntity
 
 data class StockSearchResponse(
     val symbol: String,
@@ -11,5 +12,9 @@ data class StockSearchResponse(
 )
 
 fun StockSearchResponse.toDomain() = StockSymbol(
+    symbol, name, currency, exchangeFullName, exchange
+)
+
+fun StockSearchResponse.toEntity() = StockSymbolEntity(
     symbol, name, currency, exchangeFullName, exchange
 )

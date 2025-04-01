@@ -1,9 +1,12 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.compose.compiler)
-    id ("com.google.dagger.hilt.android")
+    alias(libs.plugins.hilt)
     id ("kotlin-parcelize")
     id ("com.google.devtools.ksp")
 }
@@ -11,6 +14,16 @@ plugins {
 android {
     namespace = "com.avsoftware.dashboard"
     compileSdk = Configs.compileSdk
+
+    // Load properties from ~/.gradle/gradle.properties
+    val gradleUserHome = System.getProperty("user.home") + "/.gradle/gradle.properties"
+    val properties = Properties()
+    if (file(gradleUserHome).exists()) {
+        FileInputStream(gradleUserHome).use { input ->
+            properties.load(input)
+        }
+    }
+    val fmpApiKey = properties.getProperty("fmpApiKey") ?: "default_key"
 
     defaultConfig {
         applicationId = "com.avsoftware.dashboard"
@@ -31,7 +44,23 @@ android {
             )
         }
         debug {
+        }
+    }
+    flavorDimensions.add("environment") // Renamed for clarity
 
+    productFlavors {
+        create("dev") {
+            dimension = "environment"
+            applicationIdSuffix = ".dev" // Optional: com.avsoftware.dashboard.dev
+            buildConfigField("boolean", "DEVELOPER_OPTIONS_ENABLED", "true")
+            buildConfigField("String", "FMP_API_KEY", "\"$fmpApiKey\"")
+            buildConfigField("String", "FMP_BASE_URL", value="\"https://financialmodelingprep.com/\"")
+        }
+        create("prod") {
+            dimension = "environment"
+            buildConfigField("boolean", "DEVELOPER_OPTIONS_ENABLED", "false")
+            buildConfigField("String", "FMP_API_KEY", "\"$fmpApiKey\"")
+            buildConfigField("String", "FMP_BASE_URL", value="\"https://financialmodelingprep.com/\"")
         }
     }
     compileOptions {
@@ -42,8 +71,8 @@ android {
         jvmTarget = Configs.jvmTarget
     }
     buildFeatures {
-        viewBinding = true
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Configs.kotlinCompilerExtensionVersion // Match your Kotlin version
@@ -53,6 +82,10 @@ android {
 
 dependencies {
 
+    implementation(project(":core"))
+    implementation(project(":data"))
+    implementation(project(":database"))
+    implementation(project(":domain"))
     implementation(project(":core-ui"))
     implementation(project(":graphing"))
 
@@ -81,6 +114,12 @@ dependencies {
     implementation(libs.orbit.compose)
     implementation(libs.orbit.core)
     implementation(libs.orbit.viewmodel)
+    testImplementation(libs.orbit.test)
+
+    // Orbit MVI Framework
+    implementation(libs.orbit.core)
+    implementation(libs.orbit.viewmodel)
+    implementation(libs.orbit.compose)
     testImplementation(libs.orbit.test)
 
     implementation(libs.core.ktx)

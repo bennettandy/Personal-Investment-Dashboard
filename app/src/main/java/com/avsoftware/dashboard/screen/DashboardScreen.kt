@@ -35,6 +35,8 @@ import com.avsoftware.core.charts.SimplePieChart
 import com.avsoftware.core.ui.RoundedCornerPanel
 import com.avsoftware.core.ui.spacing.LocalSpacing
 import com.avsoftware.core.ui.spacing.MediumHorizontalSpacer
+import com.avsoftware.data.fmp.search.model.StockSymbol
+import com.avsoftware.search.StockSymbolsUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -42,6 +44,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SharedTransitionScope.DashboardScreen(
     modifier: Modifier = Modifier,
+    uiState: StockSymbolsUiState,
     navigateToDetails: () -> Unit
 ){
 
@@ -59,6 +62,12 @@ fun SharedTransitionScope.DashboardScreen(
                 )
 
                 MediumHorizontalSpacer()
+            }
+
+            uiState.tickerList.forEach {
+                item {
+                    Text(text = "${it.symbol}")
+                }
             }
 
             item {

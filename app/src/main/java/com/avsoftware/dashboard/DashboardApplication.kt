@@ -13,8 +13,5 @@ class DashboardApplication : Application() {
         super.onCreate()
 
         plant(DebugTree())
-
     }
-
-
 }

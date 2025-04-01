@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.hilt)
+    id ("com.google.devtools.ksp")
 }
 
 android {
@@ -35,6 +37,7 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":domain"))
+    implementation(project(":database"))
 
     // retrofit
     implementation(libs.retrofit)
@@ -42,6 +45,9 @@ dependencies {
 
     // hilt
     implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+
+    implementation(libs.timber)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

@@ -3,6 +3,7 @@ package com.avsoftware.dashboard
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,9 +18,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.navigation.compose.NavHost
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -28,23 +29,38 @@ import com.avsoftware.core_ui.theme.DashboardAppTheme
 import com.avsoftware.dashboard.screen.DashboardScreen
 import com.avsoftware.dashboard.screen.DetailsScreen
 import com.avsoftware.dashboard.splash.SplashScreen
-import com.avsoftware.search.SearchScreen
-import com.avsoftware.search.SearchViewModel
+import com.avsoftware.database.AppDatabase
+import com.avsoftware.search.StockSymbolsViewModel
+import com.avsoftware.search.TickerSearchScreen
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    @Inject
+    lateinit var appDatabase: AppDatabase
+
+    private val stockSymbolsViewModel: StockSymbolsViewModel by viewModels()
+
     @OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Timber.d("App Database ${appDatabase}")
 
         setContent {
 
             DashboardAppTheme {
                 val outerNavController = rememberNavController()
                 val navController = rememberNavController()
+
+                val stockSymbolUiState = stockSymbolsViewModel.container.stateFlow.collectAsState()
+
+//                LaunchedEffect(true) {
+//                    searchViewModel.handleIntent(StockSymbolsIntent.SearchTicker("TSLA"))
+//                }
 
                 SharedTransitionLayout() {
                     NavHost(
@@ -65,9 +81,8 @@ class MainActivity : ComponentActivity() {
 
                         composable(route = "search"){
                                 backStackEntry ->
-                            val viewModel: SearchViewModel = viewModel(backStackEntry)
-                            SearchScreen(
-
+                            TickerSearchScreen(
+                                stockSymbolList = stockSymbolUiState.value.tickerList
                             )
                         }
 
@@ -90,6 +105,7 @@ class MainActivity : ComponentActivity() {
                                 ) {
                                     composable(route = "dashboard") {
                                         DashboardScreen(
+                                            uiState = stockSymbolUiState.value,
                                             navigateToDetails = { navController.navigate(route = "details-screen") }
                                         )
                                     }
