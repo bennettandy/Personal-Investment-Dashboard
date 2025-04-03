@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
-import com.avsoftware.data.fmp.search.model.StockSymbol
+import com.avsoftware.model.StockSymbol
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

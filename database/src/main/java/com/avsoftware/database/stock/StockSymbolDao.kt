@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Upsert
-import com.avsoftware.database.user.User
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -20,7 +19,7 @@ interface StockSymbolDao {
     fun findByName(search: String): List<StockSymbolEntity>
 
     @Insert
-    fun insertAll(vararg symbols: StockSymbolEntity)
+    fun insertAll(symbols: List<StockSymbolEntity>)
 
     @Upsert
     fun upsert(symbol: StockSymbolEntity)

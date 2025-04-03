@@ -1,6 +1,6 @@
 package com.avsoftware.data.fmp.search
 
-import com.avsoftware.data.fmp.search.model.StockSymbol
+import com.avsoftware.model.StockSymbol
 import com.avsoftware.database.stock.StockSymbolDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

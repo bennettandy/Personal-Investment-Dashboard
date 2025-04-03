@@ -1,4 +1,4 @@
-package com.avsoftware.search
+package com.avsoftware.dashboard
 
 import android.os.Parcelable
 import androidx.lifecycle.ViewModel
@@ -16,7 +16,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class StockSymbolsViewModel @Inject constructor(
+class DashboardViewModel @Inject constructor(
     private val stockSymbolSearch: StockSymbolSearch,
     private val getStockSymbolsUseCase: GetStockSymbolsUseCase
 ): ViewModel(), ContainerHost<StockSymbolsUiState, StockSymbolsSideEffect> {

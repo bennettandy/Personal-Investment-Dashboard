@@ -1,13 +1,11 @@
 package com.avsoftware.dashboard.screen
 
-import android.widget.ProgressBar
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -35,7 +33,6 @@ import com.avsoftware.core.charts.SimplePieChart
 import com.avsoftware.core.ui.RoundedCornerPanel
 import com.avsoftware.core.ui.spacing.LocalSpacing
 import com.avsoftware.core.ui.spacing.MediumHorizontalSpacer
-import com.avsoftware.data.fmp.search.model.StockSymbol
 import com.avsoftware.search.StockSymbolsUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

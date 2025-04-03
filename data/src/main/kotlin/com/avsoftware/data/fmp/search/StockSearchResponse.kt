@@ -1,6 +1,6 @@
 package com.avsoftware.data.fmp.search
 
-import com.avsoftware.data.fmp.search.model.StockSymbol
+import com.avsoftware.model.StockSymbol
 import com.avsoftware.database.stock.StockSymbolEntity
 
 data class StockSearchResponse(

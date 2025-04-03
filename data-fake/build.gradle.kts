@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.avsoftware.data"
+    namespace = "com.avsoftware.data_fake"
     compileSdk = Configs.compileSdk
 
     defaultConfig {
@@ -47,7 +47,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    // timber
     implementation(libs.timber)
 
     implementation(libs.core.ktx)

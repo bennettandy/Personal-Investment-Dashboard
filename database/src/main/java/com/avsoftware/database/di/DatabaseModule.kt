@@ -1,8 +1,8 @@
 package com.avsoftware.database.di
 
 import android.content.Context
-import androidx.room.Room
 import com.avsoftware.database.AppDatabase
+import com.avsoftware.database.initialiser.DatabaseInitializer
 import com.avsoftware.database.stock.StockSymbolDao
 import dagger.Module
 import dagger.Provides
@@ -18,17 +18,12 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
-        return Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            "database-name"
-        ).build()
+        return DatabaseInitializer.getDatabase(context)
     }
 
     @Provides
     fun provideStockSymbolDao(appDatabase: AppDatabase): StockSymbolDao {
         return appDatabase.stockSymbolDao()
     }
-
 
 }

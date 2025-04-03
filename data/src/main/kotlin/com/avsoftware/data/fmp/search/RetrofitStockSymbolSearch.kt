@@ -2,7 +2,7 @@ package com.avsoftware.data.fmp.search
 
 import com.avsoftware.core.ApiError
 import com.avsoftware.core.DomainResult
-import com.avsoftware.data.fmp.search.model.StockSymbol
+import com.avsoftware.model.StockSymbol
 import com.avsoftware.database.stock.StockSymbolDao
 import com.avsoftware.database.stock.StockSymbolEntity
 import kotlinx.coroutines.Dispatchers
