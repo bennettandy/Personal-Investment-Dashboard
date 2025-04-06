@@ -36,6 +36,8 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
+
     // room database
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)

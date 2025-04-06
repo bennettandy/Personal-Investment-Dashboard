@@ -3,6 +3,7 @@ package com.avsoftware.database.initialiser
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.avsoftware.database.AppDatabase
 import com.avsoftware.database.stock.PortfolioTransactionEntity
@@ -32,6 +33,7 @@ object DatabaseInitializer {
                     }
                 }
             })
+            .fallbackToDestructiveMigration() // use during development, drop and recreate when version changes
             .build()
     }
 

@@ -2,6 +2,7 @@ package com.avsoftware.database.di
 
 import android.content.Context
 import com.avsoftware.database.AppDatabase
+import com.avsoftware.database.crypto.CryptoCurrencyDao
 import com.avsoftware.database.initialiser.DatabaseInitializer
 import com.avsoftware.database.stock.StockSymbolDao
 import dagger.Module
@@ -24,6 +25,11 @@ object DatabaseModule {
     @Provides
     fun provideStockSymbolDao(appDatabase: AppDatabase): StockSymbolDao {
         return appDatabase.stockSymbolDao()
+    }
+
+    @Provides
+    fun provideCryptoCurrencyDao(appDatabase: AppDatabase): CryptoCurrencyDao {
+        return appDatabase.cryptoCurrencyDao()
     }
 
 }

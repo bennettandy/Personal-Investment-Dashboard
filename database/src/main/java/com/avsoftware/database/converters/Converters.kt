@@ -2,6 +2,7 @@ package com.avsoftware.database.converters
 
 import androidx.room.TypeConverter
 import java.math.BigDecimal
+import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
@@ -24,6 +25,16 @@ class Converters {
     @TypeConverter
     fun toBigDecimal(value: String?): BigDecimal? {
         return value?.let { BigDecimal(it) }
+    }
+
+    @TypeConverter
+    fun fromLocalDate(date: LocalDate?): String? {
+        return date?.toString() // ISO_LOCAL_DATE format: "2024-06-11"
+    }
+
+    @TypeConverter
+    fun toLocalDate(dateString: String?): LocalDate? {
+        return dateString?.let { LocalDate.parse(it, DateTimeFormatter.ISO_LOCAL_DATE) }
     }
 
 }
