@@ -4,8 +4,8 @@ import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.avsoftware.core.DomainResult
-import com.avsoftware.data.fmp.search.GetStockSymbolsUseCase
-import com.avsoftware.data.fmp.search.StockSymbolSearch
+import com.avsoftware.domain.fmp.search.GetStockSymbolsUseCase
+import com.avsoftware.domain.fmp.search.StockSymbolSearch
 import com.avsoftware.model.StockSymbol
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

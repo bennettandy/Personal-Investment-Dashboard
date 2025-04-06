@@ -5,6 +5,7 @@ import com.avsoftware.core.DomainResult
 import com.avsoftware.model.StockSymbol
 import com.avsoftware.database.stock.StockSymbolDao
 import com.avsoftware.database.stock.StockSymbolEntity
+import com.avsoftware.domain.fmp.search.StockSymbolSearch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response

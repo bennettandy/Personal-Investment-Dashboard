@@ -16,6 +16,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -33,6 +34,7 @@ import com.avsoftware.core.charts.SimplePieChart
 import com.avsoftware.core.ui.RoundedCornerPanel
 import com.avsoftware.core.ui.spacing.LocalSpacing
 import com.avsoftware.core.ui.spacing.MediumHorizontalSpacer
+import com.avsoftware.dashboard.DashboardUiState
 import com.avsoftware.search.StockSymbolsUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -41,10 +43,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun SharedTransitionScope.DashboardScreen(
     modifier: Modifier = Modifier,
-    uiState: StockSymbolsUiState,
+    uiState: DashboardUiState,
     navigateToDetails: () -> Unit
 ){
-
     RoundedCornerPanel(
         modifier = modifier.padding(LocalSpacing.current.medium),
         color = MaterialTheme.colorScheme.background
@@ -61,21 +62,34 @@ fun SharedTransitionScope.DashboardScreen(
                 MediumHorizontalSpacer()
             }
 
-            uiState.tickerList.forEach {
+            if (uiState.cryptoCurrencies.isLoading) {
                 item {
-                    Text(text = "${it.symbol}")
+                    Text(text="LOADING")
                 }
             }
 
-            item {
-                Row(
-                    modifier = Modifier.fillMaxWidth()
-                        .padding(LocalSpacing.current.medium),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    SimplePieChart(modifier = Modifier)
+            if (uiState.cryptoCurrencies.isError) {
+                item {
+                    Text(text="ERROR")
                 }
             }
+
+
+            uiState.cryptoCurrencies.data?.forEach {
+                item {
+                    Text(text = "${it.symbol} : ${it.name} : ${it.exchange}")
+                }
+            }
+
+//            item {
+//                Row(
+//                    modifier = Modifier.fillMaxWidth()
+//                        .padding(LocalSpacing.current.medium),
+//                    horizontalArrangement = Arrangement.Center
+//                ) {
+//                    SimplePieChart(modifier = Modifier)
+//                }
+//            }
 
             item {
                 Text(
@@ -84,16 +98,16 @@ fun SharedTransitionScope.DashboardScreen(
                 )
             }
 
-            item {
-                ThermometerProgressBarWithLabel(
-                    percentage = 0.25f
-                )
-            }
-
-            item {
-                LinearDeterminateIndicator(
-                )
-            }
+//            item {
+//                ThermometerProgressBarWithLabel(
+//                    percentage = 0.25f
+//                )
+//            }
+//
+//            item {
+//                LinearDeterminateIndicator(
+//                )
+//            }
         }
     }
 }

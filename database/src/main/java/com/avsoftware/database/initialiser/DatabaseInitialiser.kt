@@ -5,11 +5,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.avsoftware.database.AppDatabase
+import com.avsoftware.database.stock.PortfolioTransactionEntity
+import com.avsoftware.database.stock.PortfolioTransactionsDao
 import com.avsoftware.database.stock.StockSymbolDao
 import com.avsoftware.database.stock.StockSymbolEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.OffsetDateTime
 
 object DatabaseInitializer {
     fun getDatabase(context: Context): AppDatabase {
@@ -23,14 +26,16 @@ object DatabaseInitializer {
                     super.onCreate(db)
                     // Run initial data population on a background thread
                     CoroutineScope(Dispatchers.IO).launch {
-                        prePopulateDatabase(getDatabase(context).stockSymbolDao())
+                        val database = getDatabase(context)
+                        prePopulateDatabaseStockSymbols(database.stockSymbolDao())
+                        prePopulateDatabaseTransactions(database.portfolioTransactionsDao())
                     }
                 }
             })
             .build()
     }
 
-    private suspend fun prePopulateDatabase(dao: StockSymbolDao) {
+    private  fun prePopulateDatabaseStockSymbols(dao: StockSymbolDao) {
         val initialTransactions = listOf(
             StockSymbolEntity(
                 symbol = "TSLA",
@@ -41,5 +46,15 @@ object DatabaseInitializer {
             )
         )
         dao.insertAll(initialTransactions)
+    }
+
+    private fun prePopulateDatabaseTransactions(dao: PortfolioTransactionsDao){
+        val transactions = listOf(
+            PortfolioTransactionEntity(
+                transactionDate = OffsetDateTime.now(),
+                assetKey = "TSLA",
+            )
+        )
+        dao.insertAll(transactions)
     }
 }
