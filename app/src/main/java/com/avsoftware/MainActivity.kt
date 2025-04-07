@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.navigation.compose.NavHost
 import androidx.compose.ui.Modifier
@@ -28,11 +29,14 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.avsoftware.core_ui.theme.DashboardAppTheme
 import com.avsoftware.dashboard.DashboardIntent
+import com.avsoftware.dashboard.DashboardRoomViewModel
 import com.avsoftware.dashboard.DashboardViewModel
+import com.avsoftware.dashboard.screen.DashboardRoomScreen
 import com.avsoftware.dashboard.screen.DashboardScreen
 import com.avsoftware.dashboard.screen.DetailsScreen
 import com.avsoftware.splash.SplashScreen
 import com.avsoftware.database.AppDatabase
+import com.avsoftware.domain.fmp.crypto.CryptoCurrency
 import com.avsoftware.search.StockSymbolsViewModel
 import com.avsoftware.search.TickerSearchScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,6 +52,7 @@ class MainActivity : ComponentActivity() {
 
     private val stockSymbolsViewModel: StockSymbolsViewModel by viewModels()
     private val dashboardViewModel: DashboardViewModel by viewModels()
+    private val dashboardRoomViewModel: DashboardRoomViewModel by viewModels()
 
     @OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +69,10 @@ class MainActivity : ComponentActivity() {
                 val stockSymbolUiState = stockSymbolsViewModel.container.stateFlow.collectAsState()
 
                 val dashboardUiState = dashboardViewModel.container.stateFlow.collectAsState()
+
+                val cryptoCurrencyListState: State<List<CryptoCurrency>> = dashboardRoomViewModel.dataFlow.collectAsState(
+                    emptyList()
+                )
 
 //                LaunchedEffect(true) {
 //                    searchViewModel.handleIntent(StockSymbolsIntent.SearchTicker("TSLA"))
@@ -108,7 +117,7 @@ class MainActivity : ComponentActivity() {
                                 NavHost(
                                     modifier = Modifier.padding(it),
                                     navController = navController,
-                                    startDestination = "dashboard"
+                                    startDestination = "room-dashboard"
                                 ) {
                                     composable(route = "dashboard") {
 
@@ -120,6 +129,19 @@ class MainActivity : ComponentActivity() {
 
                                         DashboardScreen(
                                             uiState = dashboardUiState.value,
+                                            navigateToDetails = { navController.navigate(route = "details-screen") }
+                                        )
+                                    }
+
+                                    composable(route = "room-dashboard") {
+
+//                                        LaunchedEffect(true) {
+//                                            Timber.d("Refreshing Crypto")
+//                                            dashboardRoomViewModel.fetchFromNetwork()
+//                                        }
+
+                                        DashboardRoomScreen(
+                                            cryptoCurrencyList = cryptoCurrencyListState.value,
                                             navigateToDetails = { navController.navigate(route = "details-screen") }
                                         )
                                     }

@@ -9,17 +9,10 @@ import com.avsoftware.database.crypto.CryptoCurrencyDao
 import com.avsoftware.database.crypto.toEntity
 import com.avsoftware.domain.fmp.crypto.CryptoCurrency
 import com.avsoftware.domain.fmp.crypto.GetCryptoCurrenciesUseCase
-import com.avsoftware.domain.fmp.search.GetStockSymbolsUseCase
-import com.avsoftware.domain.fmp.search.StockSymbolSearch
-import com.avsoftware.domain.stocks.GetStocksUseCase
-import com.avsoftware.domain.stocks.Stock
-import com.avsoftware.model.StockSymbol
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.container
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel

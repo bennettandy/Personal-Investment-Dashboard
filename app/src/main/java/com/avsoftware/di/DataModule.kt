@@ -1,10 +1,12 @@
 package com.avsoftware.di
 
 import com.avsoftware.data.fmp.crypto.RetrofitGetCryptoCurrenciesUseCase
+import com.avsoftware.data.fmp.crypto.RoomCryptoCurrenciesRepository
 import com.avsoftware.data.fmp.search.GetStockSymbolsRoomUseCase
 import com.avsoftware.domain.fmp.search.GetStockSymbolsUseCase
 import com.avsoftware.data.fmp.search.RetrofitStockSymbolSearch
 import com.avsoftware.data.stocks.RetrofitGetStocksUseCase
+import com.avsoftware.domain.fmp.crypto.CryptoCurrenciesRepository
 import com.avsoftware.domain.fmp.crypto.GetCryptoCurrenciesUseCase
 import com.avsoftware.domain.fmp.search.StockSymbolSearch
 import com.avsoftware.domain.stocks.GetStocksUseCase
@@ -41,4 +43,11 @@ abstract class DataModule {
     abstract fun bindGetCryptoCurrenciesUseCase(
         retrofitGetCryptoCurrenciesUseCase: RetrofitGetCryptoCurrenciesUseCase
     ): GetCryptoCurrenciesUseCase
+
+    @Binds
+    @Singleton
+    abstract fun bindCryptoCurrenciesRepository(
+        roomCryptoCurrenciesRepository: RoomCryptoCurrenciesRepository
+    ): CryptoCurrenciesRepository
+
 }

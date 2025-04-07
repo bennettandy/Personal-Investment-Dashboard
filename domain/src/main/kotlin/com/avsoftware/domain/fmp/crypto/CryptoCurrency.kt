@@ -10,8 +10,8 @@ data class CryptoCurrency(
     val symbol: String,
     val name: String,
     val exchange: String,
-    val icoDate: LocalDate,
-    val circulatingSupply: BigDecimal,
+    val icoDate: LocalDate?,
+    val circulatingSupply: BigDecimal?,
     val totalSupply: BigDecimal?
 ): Parcelable
 

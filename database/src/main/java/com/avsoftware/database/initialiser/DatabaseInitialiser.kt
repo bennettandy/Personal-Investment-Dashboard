@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import java.time.OffsetDateTime
 
 object DatabaseInitializer {
+
     fun getDatabase(context: Context): AppDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
@@ -35,6 +36,12 @@ object DatabaseInitializer {
             })
             .fallbackToDestructiveMigration() // use during development, drop and recreate when version changes
             .build()
+    }
+
+    // Reset the database during development
+    // Debug method to reset database
+    fun resetDatabase(context: Context) {
+        context.deleteDatabase("app_database") // Deletes the database file
     }
 
     private  fun prePopulateDatabaseStockSymbols(dao: StockSymbolDao) {
