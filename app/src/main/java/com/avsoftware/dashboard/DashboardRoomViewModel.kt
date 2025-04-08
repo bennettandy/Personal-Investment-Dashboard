@@ -15,6 +15,11 @@ class DashboardRoomViewModel
         private val cryptoCurrenciesRepository: CryptoCurrenciesRepository
     ): ViewModel() {
 
+        /*
+        This is  lot cleaner than the MVI version
+        Loading from API is encapsulated in the Repository instance
+         */
+
         val dataFlow: Flow<List<CryptoCurrency>> = cryptoCurrenciesRepository.getDataFlow()
 
         fun fetchFromNetwork() {
