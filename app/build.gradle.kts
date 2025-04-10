@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.hilt)
     id ("kotlin-parcelize")
     id ("com.google.devtools.ksp")
+    alias(libs.plugins.kover.coverage)
 }
 
 android {
@@ -135,4 +136,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // test coverage
+    // test coverage report include modules
+    kover(project(":graphing"))
+    kover(project(":data"))
+    kover(project(":core"))
+    kover(project(":core-ui"))
+    kover(project(":domain"))
+    kover(project(":data"))
+    kover(project(":data-fake"))
+    kover(project(":database"))
 }
